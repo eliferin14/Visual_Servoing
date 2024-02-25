@@ -45,4 +45,4 @@ The reference velocity is sent to the microcontroller via serial
 ## Results
 The motor is able to track the reference signal defined by the user
 
-![Video](https://imgur.com/a/6YhxnT5)
+[Imgur](https://imgur.com/r4XPlxJ)
