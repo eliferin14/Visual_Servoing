@@ -102,14 +102,14 @@ def hsv_mask(frame, hmin, smin, vmin, hmax, smax, vmax):
     return mask
 
 # Hough transform to detect frames
-def detect_circles(frame):
+def detect_circles(frame, minDist=300, quality=20, minRadius=0, maxRadius=0):
 
     # Apply Gaussian blur to reduce noise
     blurred_frame = cv2.GaussianBlur(frame, (9, 9), 2)
 
     # Apply Hough Transform to detect circles
-    circles = cv2.HoughCircles(blurred_frame, cv2.HOUGH_GRADIENT, dp=1, minDist=300,
-                               param1=300, param2=20, minRadius=10, maxRadius=30)
+    circles = cv2.HoughCircles(blurred_frame, cv2.HOUGH_GRADIENT, dp=1, minDist=minDist,
+                               param1=300, param2=quality, minRadius=minRadius, maxRadius=maxRadius)
 
     return circles
 
@@ -123,3 +123,9 @@ def draw_circles(frame, circles):
         # Draw detected circles
         for (x, y, r) in circles:
             cv2.circle(frame, (x, y), r, (255, 0, 0), 4)
+
+
+# Low pass filter
+def lowpass(measure, old_value, smoothing):
+    filtered_value = smoothing*old_value + (1-smoothing)*measure
+    return filtered_value
