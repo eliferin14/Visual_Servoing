@@ -84,6 +84,8 @@ def main():
         frame = downsample_image(frame, 0.7)
         center = ( int(frame.shape[1]/2), int(frame.shape[0]/2) )
 
+
+
         # Print the coordinates of the click if available, then reset
         global clicked_x, clicked_y, clicked_point
         if clicked_x != -1 and clicked_y != -1:
