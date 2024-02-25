@@ -53,7 +53,7 @@ void setup() {
         //motor.LPF_angle = 0.01;
 
         // Control type
-        motor.controller = MotionControlType::angle;
+        motor.controller = MotionControlType::velocity;
         //motor.torque_controller = TorqueControlType::voltage;
         motor.target = target;
 
@@ -64,7 +64,7 @@ void setup() {
         motor.P_angle.P = 10;
 
         // Limits
-        //motor.velocity_limit = 1;
+        motor.velocity_limit = 1;
 
         // Link the sensor and the driver 
         motor.linkSensor(&sensor);

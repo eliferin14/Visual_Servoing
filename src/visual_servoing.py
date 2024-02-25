@@ -19,8 +19,8 @@ def get_click_coordinates(event, x, y, flags, param):
         click_flag = True
 
 # Position PID gains
-kp = 10
-ki = 0.1
+kp = 3
+ki = 0
 
 ##############################################################
 def main():
@@ -106,6 +106,8 @@ def main():
 
         # Error
         error_measured = target_angle - measured_angle
+        if error_measured > math.pi: error_measured = error_measured - 2*math.pi
+        elif error_measured < -math.pi: error_measured = error_measured + 2*math.pi
         error_angle = utils.lowpass(error_measured, error_previous, 0.3)
         error_previous = error_angle
 
@@ -114,10 +116,9 @@ def main():
 
         # Send the control command 
         if click_flag:
-            target = target_angle + 2*math.pi*revolutions + ki*error_integral
+            target = kp*error_angle + ki*error_integral
         message = "M" + f"{-target:.2f}" + "\n"
         ser.write(message.encode())
-        print(click_flag)
 
     # Display the captured frame
         
