@@ -25,7 +25,7 @@ uint32_t t_start = 0;
 uint32_t t_loop = 0;
 
 // Offset of the encoder with respect to the vertical
-float offset = -2.71;   // position = measurement - offset
+float offset = -0.35;   // position = measurement - offset
 
 void setup() {
     Serial.begin(115200);
@@ -63,6 +63,9 @@ void setup() {
         motor.PID_velocity.D = 0;
         motor.P_angle.P = 10;
 
+        // Limits
+        //motor.velocity_limit = 1;
+
         // Link the sensor and the driver 
         motor.linkSensor(&sensor);
         motor.linkDriver(&driver);
@@ -75,8 +78,8 @@ void setup() {
         motor.init();
         motor.initFOC();
 
-        //motor.sensor_direction = CCW;
-        //motor.sensor_offset = offset;
+        motor.sensor_direction = CCW;
+        motor.sensor_offset = offset;
         //motor.zero_electric_angle = 5.68;
 
     _delay(1000);

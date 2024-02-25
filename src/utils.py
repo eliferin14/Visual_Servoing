@@ -2,6 +2,7 @@ import cv2
 import time
 import math
 import numpy as np
+import serial
 
 # Function to draw a cross
 def draw_cross(image, point, size, color, thickness):
@@ -129,3 +130,8 @@ def draw_circles(frame, circles):
 def lowpass(measure, old_value, smoothing):
     filtered_value = smoothing*old_value + (1-smoothing)*measure
     return filtered_value
+
+# Send velocity reference to the ESP32
+def send_command(ser, target):
+    message = "M" + str(target) + "\n"
+    ser.write(message.encode())
