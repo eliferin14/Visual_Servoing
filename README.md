@@ -45,6 +45,29 @@ The reference velocity is sent to the microcontroller via serial
 ## Results
 The motor is able to track the reference signal defined by the user
 
-![YAP](https://imgur.com/a/6YhxnT5)
+[Video](https://imgur.com/r4XPlxJ)
 
-[Imgur](https://imgur.com/r4XPlxJ)
+---
+# Camera calibration
+Using a chessboard it is possible to measure the ditortion parameters of the camera and of the lens.
+
+To make the project a bit more challengng, I added a wide-angle lens to the smartphone I use as camera
+
+## Calibration process
+I took 10 photos of the chessboard from various angles in order to capture most of the distortion
+
+Then using the camera_calibration script I calculated the camera matrix and the distortion coefficients and saved them in a file
+
+These values can be used to undistort any image taken with the camera, as we can see in the following images:
+
+![Image](camera_calibration/PXL_20240302_230833618.jpg)
+![Image](camera_calibration/calibresult.png)
+
+# Perspective transformation
+In order to apply the Hough transform even when the camera is pointed at an angle I need to correct the perspective of the image. Otherwise the circles are projected into ellipses and are no longer recognizable by the Hough transform.
+
+To do that I added a permanent chessboard to the setup, positioned in a way such that it lies on the same plane as the circles to detect.
+
+Then I defined a "target perspective" where the chessboard is in a specified position in the image plane (so that the squares are represented as perfect squares).
+
+Using the fucntions provided by OpenCV, I detected the corners of the chessboard on both the distorted image and the target image, and then calculated the homography matrix. The homography matrix is then used to transform the distorted image in order to match the corners of the chessboard, producing a frame where the circles are seen as (almost) perfect circles
