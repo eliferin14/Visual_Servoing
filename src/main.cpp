@@ -64,7 +64,7 @@ void setup() {
         motor.P_angle.P = 10;
 
         // Limits
-        motor.velocity_limit = 1;
+        motor.velocity_limit = 0.5;
 
         // Link the sensor and the driver 
         motor.linkSensor(&sensor);

@@ -135,3 +135,14 @@ def lowpass(measure, old_value, smoothing):
 def send_command(ser, target):
     message = "M" + str(target) + "\n"
     ser.write(message.encode())
+
+# Given an image containing a chessboard, return the corners
+def detect_chessboard_corners(image, pattern_size):
+    image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    ret, corners = cv2.findChessboardCorners(image_gray, pattern_size, flags = cv2.CALIB_CB_FILTER_QUADS)
+    if ret:
+        criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
+        corners = cv2.cornerSubPix(image_gray, corners, (5, 5), (-1, -1), criteria)
+        return corners
+    else:
+        return None
