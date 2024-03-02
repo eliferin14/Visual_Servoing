@@ -47,3 +47,4 @@ The motor is able to track the reference signal defined by the user
 
 ![YAP](https://imgur.com/a/6YhxnT5)
 
+[Imgur](https://imgur.com/r4XPlxJ)
