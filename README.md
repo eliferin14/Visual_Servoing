@@ -73,3 +73,5 @@ To do that I added a permanent chessboard to the setup, positioned in a way such
 Then I defined a "target perspective" where the chessboard is in a specified position in the image plane (so that the squares are represented as perfect squares).
 
 Using the fucntions provided by OpenCV, I detected the corners of the chessboard on both the distorted image and the target image, and then calculated the homography matrix. The homography matrix is then used to transform the distorted image in order to match the corners of the chessboard, producing a frame where the circles are seen as (almost) perfect circles
+
+[Video](https://imgur.com/a/UELBg3D)
