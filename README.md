@@ -5,6 +5,8 @@ The goal of this project is to control the position of a motor using a camera.
 
 In particular, the target position will be set with a click of the mouse.
 
+At first I position the camera exactly in fron to fthe motor to reduce distortion as much as possible. Then, once the algorithm was developed, I added a chessboard to the setup to add robustness to perspective.
+
 ## Hardware
 - ESP32 devkit V1 
 - GBM5208-75T brushless motor
@@ -60,8 +62,8 @@ Then using the camera_calibration script I calculated the camera matrix and the 
 
 These values can be used to undistort any image taken with the camera, as we can see in the following images:
 
-![Image](camera_calibration/PXL_20240302_230833618.jpg)
-![Image](camera_calibration/calibresult.png)
+![PXL_20240302_230833618](https://github.com/eliferin14/Visual_Servoing/assets/76204928/ca32d769-40c0-43fd-b952-dcd284586dc6)
+![calibresult](https://github.com/eliferin14/Visual_Servoing/assets/76204928/bed78dbb-f8ae-4dbc-8df9-216130f7b907)
 
 # Perspective transformation
 In order to apply the Hough transform even when the camera is pointed at an angle I need to correct the perspective of the image. Otherwise the circles are projected into ellipses and are no longer recognizable by the Hough transform.
